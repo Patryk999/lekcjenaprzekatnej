@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    {{object.course_title}}
+{% endblock %}
+
+{% block content %}
+    <blockquote class="blockquote text-center ">
+        <h1>{{subject_name}}</h1>
+        <br />
+        <h2>{{course_class.class_title}}: {{object.course_title}} </h2>
+        <br />
+        <div class="d-flex justify-content-center">
+            <div class="w-75 p-2">
+                <div class="h-75 p-2">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe width="40%" class="embed-responsive-item" src="https://www.youtube.com/embed/{{object.video_path}}" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <br />
+        <h2> Zadania </h2>
+    </blockquote>
+    <div class="pl-2" >
+        <form method="POST">
+            <div class="pl-2" >
+            {%for q in questions%}
+                <br />
+                <br />
+                <div class = "font-weight-bold" style=" font-size: 1.2rem; ">Zadanie {{ forloop.counter }}. </div>
+                <p>{{q.question}}</p>
+
+                {% if q.image_question %}
+                    <img src="{{q.image_question.url}}" class="img-fluid" alt="Responsive image">
+                {% endif%}
+                <div class="pl-2" >
+                    <p>
+                        <div class = "radio-item">
+                            <input type = "radio" id = "ritema{{q.id}}" value="1" name="button{{q.id}}">
+                            <label for="ritema{{q.id}}">
+                                {{ q.answer_1}}
+                            </label>
+                        </div>
+                    </p>
+                    <p>
+                        <div class = "radio-item">
+                            <input type = "radio" id="ritemb{{q.id}}" value="2" name="button{{q.id}}">
+                            <label for="ritemb{{q.id}}">
+                                {{ q.answer_2}}
+                            </label>
+                        </div>
+                    </p>
+                    <p>
+                        <div class = "radio-item">
+                            <input type = "radio" id="ritemc{{q.id}}" value="3" name="button{{q.id}}">
+                            <label for="ritemc{{q.id}}">
+                                {{ q.answer_3}}
+                            </label>
+                        </div>
+                    </p>
+                    <p>
+                        <div class = "radio-item">
+                            <input type = "radio" id="ritemd{{q.id}}" value="4" name="button{{q.id}}">
+                            <label for="ritemd{{q.id}}">
+                                {{ q.answer_4}}
+                            </label>
+                        </div>
+                    </p>
+                </div>
+            {%endfor%}
+            </div>
+            {% csrf_token %}
+            <br />
+            <br />
+            <div class="d-flex justify-content-center">
+                <div class="w-75 p-2">
+                    <button type="submit" class="btn btn-info btn-lg btn-block">
+                        Zatwierdź odpowiedzi
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <br />
+    <br />
+    <div class="pl-4" >
+        <a style="color: #ffffff00;" href="{%url 'course_all' subject_name course_class.id  %}">
+            <button type="button" class="btn btn-secondary px-2">
+                Powrót
+            </button>
+        </a>
+    </div>
+{% endblock %}

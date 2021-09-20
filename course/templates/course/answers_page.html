@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{object.course_title}} Odpowiedzi
+{% endblock %}
+
+{% block content %}
+    <blockquote class="blockquote text-center ">
+        <h1>{{subject_name}}</h1>
+        <br />
+        <h2>{{course_class.class_title}}: {{object.course_title}} </h2>
+        <br />
+        <h2>Wynik {{score}}/{{num_of_items}}</h2>
+    </blockquote>
+    <br />
+    <div class="pl-2" >
+        <form method="POST">
+            <div class="pl-2" >
+                {%for q,ans in questions.items%}
+                <br />
+                <br />
+                <div class = "font-weight-bold" style=" font-size: 1.2rem; ">Zadanie {{ forloop.counter }}. </div>
+                <p>{{q.question}}</p>
+                {% if q.image_question %}
+                <img src="{{q.image_question.url}}" class="img-fluid" alt="Responsive image">
+                {% endif%}
+                {% if q.image_answer %}
+                <p> ROZWIĄZANIE:</p>
+                {% endif%}
+                {% if q.image_answer %}
+                <img src="{{q.image_answer.url}}" class="img-fluid" alt="Responsive image">
+                {% endif%}
+                <div class="pl-2" >
+                {%if q.good_answer == ans   %}
+                    <p>
+                        {%if ans == 1 %}
+                        <div class = "radio-item-green">
+                            <input type = "radio" value="1" id = "ritema1{{q.id}}1" name="button{{q.id}}" checked disabled>
+                            <label for="ritema1{{q.id}}1">
+                                {{ q.answer_1}}
+                            </label>
+                        </div>
+                        {%else%}
+                        <div class = "radio-item">
+                            <input type = "radio" value="1" id = "ritema2{{q.id}}1" name="button{{q.id}}" disabled>
+                            <label for="ritema2{{q.id}}1">
+                                {{ q.answer_1}}
+                            </label>
+                        </div>
+                        {%endif%}
+                    </p>
+                    <p>
+                        {%if ans == 2 %}
+                        <div class = "radio-item-green">
+                            <input type = "radio" value="2" id = "ritema1{{q.id}}2" name="button{{q.id}}" checked disabled>
+                            <label for="ritema1{{q.id}}2">
+                                {{ q.answer_2}}
+                            </label>
+                        </div>
+                        {%else%}
+                        <div class = "radio-item">
+                            <input type = "radio" value="2" id = "ritema2{{q.id}}2" name="button{{q.id}}" disabled>
+                            <label for="ritema2{{q.id}}2">
+                                {{ q.answer_2}}
+                            </label>
+                        </div>
+                        {%endif%}
+                    </p>
+                    <p>
+                        {%if ans == 3 %}
+                        <div class = "radio-item-green">
+                            <input type = "radio" value="3" id = "ritema1{{q.id}}3" name="button{{q.id}}" checked disabled>
+                            <label for="ritema1{{q.id}}3">
+                                {{ q.answer_3}}
+                            </label>
+                        </div>
+                        {%else%}
+                        <div class = "radio-item">
+                            <input type = "radio" value="3" id = "ritema2{{q.id}}3" name="button{{q.id}}" disabled>
+                            <label for="ritema2{{q.id}}3">
+                                {{ q.answer_3}}
+                            </label>
+                        </div>
+                        {%endif%}
+                    </p>
+                    <p>
+                        {%if ans == 4 %}
+                        <div class = "radio-item-green">
+                            <input type = "radio" value="4" id = "ritema1{{q.id}}4" name="button{{q.id}}" checked disabled>
+                            <label for="ritema1{{q.id}}4">
+                                {{ q.answer_4}}
+                            </label>
+                        </div>
+                        {%else%}
+                        <div class = "radio-item">
+                            <input type = "radio" value="4" id = "ritema2{{q.id}}4" name="button{{q.id}}" disabled>
+                            <label for="ritema2{{q.id}}4">
+                                {{ q.answer_4}}
+                            </label>
+                        </div>
+                        {%endif%}
+                    </p>
+                {%else%}
+                    <p>
+                        {%if ans == 1%}
+                        <div class = "radio-item-red">
+                            <input type = "radio" value="1" id = "ritema1{{q.id}}5" name="button{{q.id}}1" checked disabled>
+                            <label for="ritema1{{q.id}}5">
+                                {{ q.answer_1}}
+                            </label>
+                        </div>
+                        {%elif ans == 0 and q.good_answer != 1%}
+                        <div class = "radio-item-red">
+                            <input type = "radio" value="1" id = "ritema4{{q.id}}5" name="button{{q.id}}1"  disabled>
+                            <label for="ritema4{{q.id}}5">
+                                {{ q.answer_1}}
+                            </label>
+                        </div>
+                        {%elif q.good_answer == 1%}
+                        <div class = "radio-item-green">
+                            <input type = "radio" value="1" id = "ritema2{{q.id}}5" name="button{{q.id}}1" checked disabled>
+                            <label for="ritema2{{q.id}}5">
+                                {{ q.answer_1}}
+                            </label>
+                        </div>
+                        {%else%}
+                        <div class = "radio-item">
+                            <input type = "radio" value="1" id = "ritema3{{q.id}}5" name="button{{q.id}}1" disabled>
+                            <label for="ritema3{{q.id}}5">
+                                {{ q.answer_1}}
+                            </label>
+                        </div>
+                        {%endif%}
+                    </p>
+                    <p>
+                        {%if ans == 2%}
+                        <div class = "radio-item-red">
+                            <input type = "radio" value="2" id = "ritema1{{q.id}}6" name="button{{q.id}}2" checked disabled>
+                            <label for="ritema1{{q.id}}6">
+                                {{ q.answer_2}}
+                            </label>
+                        </div>
+                        {%elif ans == 0 and q.good_answer != 2%}
+                        <div class = "radio-item-red">
+                            <input type = "radio" value="2" id = "ritema4{{q.id}}6" name="button{{q.id}}2" disabled>
+                            <label for="ritema4{{q.id}}6">
+                                {{ q.answer_2}}
+                            </label>
+                        </div>
+                        {%elif q.good_answer == 2%}
+                        <div class = "radio-item-green">
+                            <input type = "radio" value="2" id = "ritema2{{q.id}}6" name="button{{q.id}}2" checked disabled>
+                            <label for="ritema2{{q.id}}6">
+                                {{ q.answer_2}}
+                            </label>
+                        </div>
+                        {%else%}
+                        <div class = "radio-item">
+                            <input type = "radio" value="2" id = "ritema3{{q.id}}6" name="button{{q.id}}2" disabled>
+                            <label for="ritema3{{q.id}}6">
+                                {{ q.answer_2}}
+                            </label>
+                        </div>
+                        {%endif%}
+                    </p>
+                    <p>
+                        {%if ans == 3%}
+                        <div class = "radio-item-red">
+                            <input type = "radio" value="3" id = "ritema1{{q.id}}7" name="button{{q.id}}3" checked disabled>
+                            <label for="ritema1{{q.id}}7">
+                                {{ q.answer_3}}
+                            </label>
+                        </div>
+                        {%elif ans == 0 and q.good_answer != 3%}
+                        <div class = "radio-item-red">
+                            <input type = "radio" value="3" id = "ritema4{{q.id}}7" name="button{{q.id}}3" disabled>
+                            <label for="ritema4{{q.id}}7">
+                                {{ q.answer_3}}
+                            </label>
+                        </div>
+                        {%elif q.good_answer == 3%}
+                        <div class = "radio-item-green">
+                            <input type = "radio" value="3" id = "ritema2{{q.id}}7" name="button{{q.id}}3" checked disabled>
+                            <label for="ritema2{{q.id}}7">
+                                {{ q.answer_3}}
+                            </label>
+                        </div>
+                        {%else%}
+                        <div class = "radio-item">
+                            <input type = "radio" value="3" id = "ritema3{{q.id}}7" name="button{{q.id}}3" disabled>
+                            <label for="ritema3{{q.id}}7">
+                                {{ q.answer_3}}
+                            </label>
+                        </div>
+                        {%endif%}
+                    </p>
+                    <p>
+                        {%if ans == 4%}
+                        <div class = "radio-item-red">
+                            <input type = "radio" value="4" id = "ritema1{{q.id}}8" name="button{{q.id}}4" checked disabled>
+                            <label for="ritema1{{q.id}}8">
+                                {{ q.answer_4}}
+                            </label>
+                        </div>
+                        {%elif ans == 0 and q.good_answer != 4%}
+                        <div class = "radio-item-red">
+                            <input type = "radio" value="4" id = "ritema4{{q.id}}8" name="button{{q.id}}4"  disabled>
+                            <label for="ritema4{{q.id}}8">
+                                {{ q.answer_4}}
+                            </label>
+                        </div>
+                        {%elif q.good_answer == 4%}
+                        <div class = "radio-item-green">
+                            <input type = "radio" value="4" id = "ritema2{{q.id}}8" name="button{{q.id}}4" checked disabled>
+                            <label for="ritema2{{q.id}}8">
+                                {{ q.answer_4}}
+                            </label>
+                        </div>
+                        {%else%}
+                        <div class = "radio-item">
+                            <input type = "radio" value="4" id = "ritema3{{q.id}}8" name="button{{q.id}}4" disabled>
+                            <label for="ritema3{{q.id}}8">
+                                {{ q.answer_4}}
+                            </label>
+                        </div>
+                        {%endif%}
+                    </p>
+                {%endif%}
+                </div>
+            {%endfor%}
+            </div>
+        </form>
+    </div>
+
+
+        <div class="d-flex justify-content-center">
+                <div class="w-75 p-2">
+                    <a style="color: #ffffff00;" href="{%url 'course_all' subject_name id %}">
+                        <button type="button" class="btn btn-secondary btn-lg btn-block">
+                            {{course_class.class_title}} {{subject_name}}
+                        </button>
+                    </a>
+                </div>
+        </div>
+
+{% endblock %}

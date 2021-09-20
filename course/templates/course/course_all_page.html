@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+
+{% block title%}
+    {{subject_name}}: {{course_class.class_title}}
+{% endblock%}
+
+{%block content%}
+    <blockquote class="blockquote text-center ">
+        <h1>{{subject_name}}</h1>
+        <br />
+        <h2>{{course_class.class_title}}</h2>
+        {% for object in objects%}
+            <div class="d-flex justify-content-center">
+                <div class="w-75 p-2">
+                    <a style="color: #ffffff00;" href="{%url 'course' subject_name course_class.id object.id  %}">
+                        <button type="button" class="btn btn-success btn-lg btn-block">
+                            {{object}}
+                        </button>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </blockquote>
+    <br />
+    <div class="pl-4" >
+        <a style="color: #ffffff00;" href="{%url 'class_all' subject_name %}">
+            <button type="button" class="btn btn-secondary px-2">
+                Powrót
+            </button>
+        </a>
+    </div>
+{% endblock %}

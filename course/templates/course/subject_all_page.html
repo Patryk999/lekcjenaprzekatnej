@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    Lekcje
+{% endblock %}
+
+{% block content %}
+
+    <blockquote class="blockquote text-center ">
+        <br />
+
+        <h1>Wybierz przedmiot:</h1>
+        <br />
+        {% for subject in subjects %}
+            <div class="d-flex justify-content-center">
+                <div class="w-75 p-2">
+                    <a style="color: #ffffff00;" href="{%url 'class_all' subject.subject_title %}">
+                        <button type="button" class="btn btn-success btn-lg btn-block">
+                            {{subject}}
+                        </button>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </blockquote>
+{% endblock %}

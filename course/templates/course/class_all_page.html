@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+
+{% block title%}
+    {{name}}
+{% endblock%}
+
+{%block content%}
+    <blockquote class="blockquote text-center ">
+        <h1>{{name}} </h1>
+        <br />
+        <h2>Wybierz klasę:</h2>
+        {% for class in objects %}
+            <div class="d-flex justify-content-center">
+                <div class="w-75 p-2">
+                    <a style="color: #ffffff00;" href="{%url 'course_all' name class.id  %}">
+                        <button type="button" class="btn btn-success btn-lg btn-block">
+                            {{class.class_title}}
+                        </button>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </blockquote>
+    <br />
+    <div class="pl-4" >
+        <a style="color: #ffffff00;" href = "{% url 'welcome_page' %}">
+            <button type="button" class="btn btn-secondary px-2">
+                Powrót
+            </button>
+        </a>
+    </div>
+{% endblock %}
